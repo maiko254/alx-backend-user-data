@@ -5,10 +5,10 @@ import re
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
-                 seperator: str) -> str:
+                 separator: str) -> str:
     """Function obsfucating select fields in log messages with `redaction` arg
     """
     for i in fields:
-        pattern = re.compile(f'{i}=.*?{seperator}')
-        message = re.sub(pattern, f'{i}={redaction}{seperator}', message)
+        pattern = re.compile(f'{i}=.*?{separator}')
+        message = re.sub(pattern, f'{i}={redaction}{separator}', message)
     return message
