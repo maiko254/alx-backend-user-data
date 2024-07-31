@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Module obsfucating select fields in log messages"""
-from typing import List
 import re
 import logging
+from typing import List
 
 
 class RedactingFormatter(logging.Formatter):
