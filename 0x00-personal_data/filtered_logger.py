@@ -20,9 +20,9 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """Formats and filters log records to hide PII fields"""
-        record.msg = filter_datum(self.fields, self.REDACTION, record.msg,
-                                  self.SEPARATOR)
-        return super().format(record)
+        message = super().format(record)
+        return filter_datum(self.fields, self.REDACTION, message,
+                            self.SEPARATOR)
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
