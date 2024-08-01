@@ -55,8 +55,11 @@ def main() -> None:
     logger = get_logger()
     rows = cursor.fetchall()
     for row in rows:
-        record = dict(zip(columns, row))
-        message = ", ".join([f"{k}={v}" for k, v in record.items()])
+        record = map(
+                lambda m: '{}={}'.format(m[0], m[1]),
+                zip(columns, row),
+            )
+        message = '{};'.format('; '.join(list(record)))
         log_args = ("user_data,", logging.INFO,
                     None, None, message, None, None)
         log_record = logging.LogRecord(*log_args)
