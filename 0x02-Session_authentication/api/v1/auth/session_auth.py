@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Implements class SessionAuth inheriting from Auth class
 """
-from api.v1.auth.auth import Auth
 import uuid
+from api.v1.auth.auth import Auth
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -25,3 +26,9 @@ class SessionAuth(Auth):
         if session_id is None or not isinstance(session_id, str):
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """ """
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+        return User.get(user_id)
