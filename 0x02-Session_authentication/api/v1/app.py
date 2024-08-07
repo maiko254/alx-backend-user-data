@@ -19,6 +19,9 @@ if getenv('AUTH_TYPE') == 'auth':
 elif getenv('AUTH_TYPE') == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
+elif getenv('AUTH_TYPE') == 'session_auth':
+    from api.v1.auth.session_auth import SessionAuth
+    auth = SessionAuth()
 
 
 @app.errorhandler(404)
@@ -56,7 +59,6 @@ def before_request():
         abort(403)
     user = auth.current_user(request)
     request.current_user = user
-
 
 
 if __name__ == "__main__":
