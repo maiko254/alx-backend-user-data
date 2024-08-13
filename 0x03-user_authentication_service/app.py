@@ -9,13 +9,13 @@ AUTH = Auth()
 
 
 @app.route("/", methods=['GET'], strict_slashes=False)
-def welcome():
+def welcome() -> str:
     """Welcome page """
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=['POST'], strict_slashes=False)
-def users():
+def users() -> str:
     """Register new users"""
     email = request.form.get('email')
     password = request.form.get('password')
