@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Module implementing a basic Flask app"""
-from flask import Flask, jsonify, request, abort, redirect
+from flask import Flask, jsonify, request, abort, redirect, Response
 from auth import Auth
 
 
@@ -9,7 +9,7 @@ AUTH = Auth()
 
 
 @app.route("/", methods=['GET'])
-def welcome() -> str:
+def welcome() -> Response:
     """Welcome page """
     return jsonify({"message": "Bienvenue"})
 
