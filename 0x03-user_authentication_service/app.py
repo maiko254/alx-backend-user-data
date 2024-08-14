@@ -10,7 +10,7 @@ AUTH = Auth()
 
 @app.route("/", methods=['GET'])
 def welcome() -> Response:
-    """Welcome page """
+    """Return a JSON payload with a welcome message. """
     return jsonify({"message": "Bienvenue"})
 
 
