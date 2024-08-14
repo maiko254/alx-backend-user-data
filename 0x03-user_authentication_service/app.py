@@ -42,13 +42,24 @@ def sessions() -> str:
 
 
 @app.route("/sessions", methods=['DELETE'], strict_slashes=False)
-def delete_session() -> str:
+def logout() -> None:
     """Destroy a session for the user"""
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if user:
         AUTH.destroy_session(user.id)
         redirect('/')
+    else:
+        abort(403)
+
+
+@app.route("/profile", methods=['GET'], strict_slashes=False)
+def profile() -> str:
+    """Get the profile of the user"""
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if user:
+        return jsonify({"email": user.email}), 200
     else:
         abort(403)
 
